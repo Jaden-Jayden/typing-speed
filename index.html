@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<main>
+			<section class="top">
+				<div class="Logo">
+					<img src="Logo.svg" alt="" />
+				</div>
+
+				<h2 class="Trophy">
+					<img src="Trophy Icon.svg" alt="" /> Personal best: 92 WPM
+				</h2>
+			</section>
+			<section class="Middle">
+				<section class="WAT">
+					<div><h2>WPM:0</h2></div>
+					<div><h2>Accuracy:100%</h2></div>
+					<div><h2>Time:0:60</h2></div>
+				</section>
+				<section class="difficulty">
+					<h2>Difficulty:</h2>
+
+					<button class="button"><h2 class="chose">Easy</h2></button>
+					<button class="button"><h2 class="chose">Medium</h2></button>
+					<button class="button"><h2 class="chose">Hard</h2></button>
+				</section>
+			</section>
+			<section class="bottom">
+				<textarea name="" id="area">Text</textarea>
+				<div id="startclick" class="startclick">
+					<button class="blue"><h2>Start Typing Test</h2></button>
+					<h3>Or click the text and start typing</h3>
+					<button onclick="myFunction()">Click me</button>
+				</div>
+			</section>
+		</main>
+
+		<script>
+			function myFunction() {
+				document.getElementById("startclick").innerHTML = "";
+			}
+		</script>
+	</body>
+</html>
