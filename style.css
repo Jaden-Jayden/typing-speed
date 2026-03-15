@@ -1,58 +1,89 @@
 body{
-display:flex;
-flex-direction:column;
-background:#121212;
-color:white;
-font-family:Arial;
-margin:0;
+display: flex;
+background:#0f0f10;
+color:#d1d1d1;
+justify-content:center;
 }
 
 main{
 width:90%;
-margin:auto;
-display:flex;
-flex-direction:column;
+max-width:900px;
+margin-top:40px;
 }
 
 .top{
 display:flex;
 justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
 }
 
-.Middle{
+.Logo{
+height:40px;
+}
+.trophy{
+font-size:16px;
+color:#d1d1d1;
 display:flex;
-flex-direction:column;
+align-items:center;
+gap:8px;
 }
-
+.trophyy{
+height:20px;
+}
+.middle{
+margin-bottom:20px;
+}
 .WAT{
 display:flex;
-gap:15px;
+gap:20px;
+font-size:16px;
 }
-
+.WAT {
+font-weight:bold;
+}
 .difficulty{
+display:flex;
+align-items:center;
+gap:10px;
 margin-top:10px;
 }
+.budiff{
 
-.button{
-background:#121212;
-border:1px solid #717178;
-border-radius:12px;
-color:white;
+color:#d1d1d1;
 padding:6px 12px;
 cursor:pointer;
+transition:0.2s;
+border-radius:8px;
+background:#1c1c1f;
+border:1px solid #3b3b3f;
+}
+.button:hover{
+background:#2a2a2e;
+}
+.wordDisplaything{
+margin-top:30px;
+font-size:28px;
+line-height:40px;
+color:#6c6c70;
+user-select:none;
+}
+.wordDisplaything{
+transition:0.1s;
 }
 
-.wordDisplay{
-margin-top:30px;
-color:#717178;
-font-size:24px;
-line-height:35px;
+.wordDisplaything span.correct{
+color:#32d296;
+}
+
+.wordDisplaything span.wrong{
+color:#ff5c5c;
 }
 
 textarea{
 width:100%;
 margin-top:20px;
-background:#121212;
+background:transparent;
 color:white;
 border:none;
 outline:none;
@@ -63,41 +94,69 @@ resize:none;
 .startclick{
 text-align:center;
 margin-top:20px;
+color:#888;
 }
 
 .blue{
-background:#177dff;
-color:white;
+background:#2b7cff;
 border:none;
 padding:10px 20px;
-border-radius:12px;
+border-radius:8px;
+color:white;
 cursor:pointer;
+font-size:16px;
+transition:0.2s;
+}
+
+.blue:hover{
+background:#1f63d6;
 }
 
 .result{
 display:none;
-margin-top:30px;
+margin-top:40px;
+text-align:center;
 }
 
-#good{color:green;}
-#bad{color:red;}
+#good{
+color:#32d296;
+font-weight:bold;
+}
 
-/* Tablet */
+#bad{
+color:#ff5c5c;
+font-weight:bold;
+}
+
+#again{
+margin-top:15px;
+background:#2a2a2e;
+border:none;
+padding:10px 20px;
+border-radius:8px;
+color:white;
+cursor:pointer;
+}
+
+#again:hover{
+background:#3a3a40;
+}
 
 @media(min-width:768px){
 
 .wordDisplay{
-font-size:30px;
+font-size:32px;
+line-height:45px;
 }
 
 }
-
-/* Desktop */
-
 @media(min-width:1024px){
 
 main{
-max-width:900px;
+max-width:1000px;
 }
 
-}
+.wordDisplay{
+font-size:36px;
+line-height:50px;
+}}

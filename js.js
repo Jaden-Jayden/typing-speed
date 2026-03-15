@@ -1,239 +1,247 @@
 let difficulty = "easy"
-
-let words = []
 let currentWord = ""
-
+let letterIndex = 0
 let wpm = 0
 let correctChars = 0
 let totalChars = 0
-
 let goodWords = 0
 let badWords = 0
-
 let time = 60
 let timer
 
 
-const easy = ["chat","chien","pain","lait","eau","table","ami","jour"]
-
-const medium = ["maison","voiture","ordinateur","clavier","bureau","travail"]
-
+const easy = [
+"chat",
+"chien",
+"pain",
+"lait",
+"eau",
+"sucre",
+"table",
+"chaise",
+"porte",
+"mur",
+"main",
+"pied",
+"tête",
+"nez",
+"yeux",
+"bras",
+"jambe",
+"dos",
+"ami",
+"amie",
+"père",
+"mère",
+"frère",
+"soeur",
+"jour",
+"nuit",
+"matin",
+"soir",
+"hier",
+"demain",
+"ici",
+"là",
+"oui",
+"non",
+"bien",
+"mal",
+"vite",
+"lent",
+"haut",
+"bas",
+"gros",
+"petit",
+"beau",
+"laid",
+"vrai",
+"faux",
+"bon",
+"mauvais",
+"chaud",
+"froid",
+"plein",
+"vide",
+"dur",
+"mou",
+"clair",
+"sombre",
+"neuf",
+"vieux"]
+const medium = [
+"maison",
+"voiture",
+"ordinateur",
+"clavier",
+"écran",
+"téléphone",
+"fenêtre",
+"cuisine",
+"salon",
+"chambre",
+"bureau",
+"travail",
+"école",
+"collège",
+"université",
+"professeur",
+"élève",
+"étudiant",
+"exercice",
+"question",
+"réponse",
+"solution",
+"problème",
+"histoire",
+"géographie",
+"science",
+"nature",
+"animal",
+"plante",
+"montagne",
+"rivière",
+"océan",
+"forêt",
+"prairie",
+"désert",
+"nuage",
+"pluie",
+"orage",
+"vent",
+"soleil",
+"étoile",
+"planète",
+"galaxie",
+"univers",
+"énergie","force"]
 const hard = ["administration","programmation","optimisation","configuration"]
 
 
-let area = document.getElementById("area")
-let wordDisplay = document.getElementById("wordDisplay")
-
-let wpmText = document.getElementById("wpm")
-let accuracyText = document.getElementById("accuracy")
-let timeText = document.getElementById("time")
-
-let bestText = document.getElementById("best")
-
-let goodText = document.getElementById("good")
-let badText = document.getElementById("bad")
-
-let resultBox = document.getElementById("result")
-
-
-let bestScore = localStorage.getItem("best") || 0
+const area = document.getElementById("area")
+const wordDisplay = document.getElementById("wordDisplay")
+const wpmText = document.getElementById("wpm")
+const accuracyText = document.getElementById("accuracy")
+const timeText = document.getElementById("time")
+const bestText = document.getElementById("best")
+const goodText = document.getElementById("good")
+const badText = document.getElementById("bad")
+const resultBox = document.getElementById("result")
+const bestScore = localStorage.getItem("best") || 0
 bestText.innerText = bestScore
-
-
 
 document.querySelectorAll(".diff").forEach(btn => {
 
 btn.addEventListener("click", function(){
-
 difficulty = this.dataset.level
-
-})
-
-})
-
-
+})})
 
 document.getElementById("start").addEventListener("click", startGame)
-
-
 
 function startGame(){
 
 document.getElementById("startclick").style.display="none"
-
-wpm=0
-correctChars=0
-totalChars=0
-goodWords=0
-badWords=0
-time=60
-
-wpmText.innerText=0
-accuracyText.innerText=0
-timeText.innerText=60
-
-generateWords()
-
-timer=setInterval(tick,1000)
-
+wpm = 0
+correctChars = 0
+totalChars = 0
+goodWords = 0
+badWords = 0
+time = 60
+wpmText.innerText = 0
+accuracyText.innerText = 0
+timeText.innerText = 60
+generateWord()
+timer = setInterval(updateTimer,1000)
 area.focus()
-
 }
 
-
-
-function generateWords(){
+function generateWord(){
 
 let list
-
 if(difficulty==="easy") list=easy
 if(difficulty==="medium") list=medium
 if(difficulty==="hard") list=hard
-
-words=[]
-
-for(let i=0;i<80;i++){
-
 let r=Math.floor(Math.random()*list.length)
-
-words.push(list[r])
-
+currentWord = list[r]
+letterIndex = 0
+displayWord()
 }
 
-currentWord=words[0]
+function displayWord(){
 
-showWords()
-
-}
-
-
-
-function showWords(){
-
-wordDisplay.innerText=words.join(" ")
-
-}
-
-
-
-function tick(){
-
-time--
-
-timeText.innerText=time
-
-if(time<=0){
-
-endGame()
-
-}
-
-}
-
+wordDisplay.innerHTML=""
+currentWord.split("").forEach(letter => {
+let span=document.createElement("span")
+span.innerText=letter
+wordDisplay.appendChild(span)
+})}
 
 
 area.addEventListener("keydown", function(e){
 
-if(e.key===" "){
-
+if(e.key==="Backspace"){
 e.preventDefault()
-
-checkWord()
-
+return
 }
 
+
+if(e.key===" "){
+e.preventDefault()
+nextWord()
+return
+}
+
+let letters=document.querySelectorAll("#wordDisplay span")
+if(letterIndex >= letters.length){
+return
+}
+let expected = letters[letterIndex].innerText
+totalChars++
+if(e.key === expected){
+letters[letterIndex].style.color="lime"
+correctChars++
+}else{
+letters[letterIndex].style.color="red"
+}
+letterIndex++
 })
 
-
-
-function checkWord(){
-
-let typed=area.value.trim()
-
-let correctWord=true
-
-for(let i=0;i<currentWord.length;i++){
-
-if(typed[i]===currentWord[i]){
-
-correctChars++
-
-}else{
-
-correctWord=false
-
-}
-
-}
-
-totalChars+=currentWord.length
-
-if(correctWord){
-goodWords++
-}else{
+function nextWord(){
+if(letterIndex < currentWord.length){
 badWords++
+}else{
+goodWords++
 }
-
 wpm++
-
-wpmText.innerText=wpm
-
-let accuracy=Math.round((correctChars/totalChars)*100)
-
-accuracyText.innerText=accuracy
-
-words.shift()
-
-let newWord=getRandomWord()
-
-words.push(newWord)
-
-currentWord=words[0]
-
-showWords()
-
+wpmText.innerText = wpm
+let accuracy = Math.round((correctChars/totalChars)*100)
+accuracyText.innerText = accuracy
 area.value=""
-
+generateWord()
 }
 
+function updateTimer(){
 
-
-function getRandomWord(){
-
-let list
-
-if(difficulty==="easy") list=easy
-if(difficulty==="medium") list=medium
-if(difficulty==="hard") list=hard
-
-return list[Math.floor(Math.random()*list.length)]
-
-}
-
-
+time--
+timeText.innerText = time
+if(time === 0){
+endGame()
+}}
 
 function endGame(){
 
 clearInterval(timer)
+area.disabled = true
+goodText.innerText = goodWords
+badText.innerText = badWords
+resultBox.style.display = "block"
 
-resultBox.style.display="block"
-
-goodText.innerText=goodWords
-badText.innerText=badWords
-
-if(wpm>bestScore){
-
+if(wpm > bestScore){
 localStorage.setItem("best", wpm)
-bestText.innerText=wpm
-
-}
-
-}
-
-
+bestText.innerText = wpm
+}}
 
 document.getElementById("again").addEventListener("click", function(){
 
 location.reload()
-
 })

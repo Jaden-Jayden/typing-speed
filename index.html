@@ -4,84 +4,48 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Typing Test</title>
-
 <link rel="stylesheet" href="style.css">
-
 </head>
-
 <body>
-
 <main>
 
-<section class="top">
+    <section class="top">
+        <div class="Logo">
+            <img src="Logo.svg" alt="">
+        </div>
+        <h2 class="trophy">
+            <img class="trophyy" src="Trophy Icon.svg" alt="">
+            Personal best: <span id="best">0</span> WPM
+        </h2>
+    </section>
 
-<div class="Logo">
-<img src="Logo.svg" alt="">
-</div>
+    <section class="middle">
+        <section class="WAT">
+            <div><h2>WPM: <span id="wpm">0</span></h2></div>
+            <div><h2>Accuracy: <span id="accuracy">0</span></h2></div>
+            <div><h2>Time: <span id="time">67</span></h2></div>
+        </section>
 
-<h2 class="Trophy">
-<img src="Trophy Icon.svg" alt="">
-Personal best: <span id="best">0</span> WPM
-</h2>
+        <section class="difficulty">
+            <h2>Difficulty:</h2>
+            <button class="budiff" data-level="easy">Easy</button>
+            <button class="budiff" data-level="medium">Medium</button>
+            <button class="budiff" data-level="hard">Hard</button>
+        </section>
+    </section>
 
-</section>
+    <section class="bottom">
 
+        <div id="wordDisplay" class="wordDisplaything"></div>
+        <textarea id="area"></textarea>
 
-<section class="Middle">
-
-<section class="WAT">
-
-<div><h2>WPM: <span id="wpm">0</span></h2></div>
-
-<div><h2>Accuracy: <span id="accuracy">0</span>%</h2></div>
-
-<div><h2>Time: <span id="time">60</span></h2></div>
-
-</section>
-
-
-<section class="difficulty">
-
-<h2>Difficulty:</h2>
-
-<button class="button diff" data-level="easy">Easy</button>
-<button class="button diff" data-level="medium">Medium</button>
-<button class="button diff" data-level="hard">Hard</button>
-
-</section>
-
-</section>
-
-
-<section class="bottom">
-
-<div id="wordDisplay" class="wordDisplay"></div>
-
-<textarea id="area"></textarea>
-
-<div id="startclick" class="startclick">
-
-<button id="start" class="blue">Start Typing Test</button>
-
-<h3>Or click the text and start typing</h3>
-
-</div>
-
-</section>
-
-
-<section id="result" class="result">
-
-<p>Correct words: <span id="good">0</span></p>
-<p>Wrong words: <span id="bad">0</span></p>
-
-<button id="again">Go Again</button>
-
-</section>
-
+        <div id="startclick" class="startclick">
+            <button id="start" class="blue">Start Typing Test</button>
+            <h3>Or just click the box and start typing</h3>
+        </div>
+    </section>
+    
 </main>
-
 <script src="js.js"></script>
-
 </body>
 </html>
